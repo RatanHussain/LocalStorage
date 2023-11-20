@@ -4,14 +4,18 @@ let fontSize = document.querySelector('#fontSize');
 let bgColor = document.querySelector('#bgColor');
 let textArea = document.querySelector('#textArea');
 
+function get(){
+    let getted = localStorage.getItem('fontSize')
+    textArea.style.fontSize = getted;
+
+}
 
 
 // fontSize listener here
 fontSize.addEventListener('change',(event)=>{
-    // textArea.style.fontSize = event.target.value;
     let value = event.target.value
-    localStorage.setItem(fontSiz,value)
-    localStorage.getItem('fontSize')
+    localStorage.setItem('fontSize',value)
+    get()
 })
 
 
