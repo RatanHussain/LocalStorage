@@ -1,31 +1,54 @@
 // selection here
 
-let fontSize = document.querySelector('#fontSize');
-let bgColor = document.querySelector('#bgColor');
+let fontbtn = document.querySelector('#fontSize');
+let bgbtn = document.querySelector('#bgColor');
 let textArea = document.querySelector('#textArea');
+let clearbtn = document.querySelector('#btn');
 
 
 
-// fontSize listener here
-fontSize.addEventListener('change',(event)=>{
-    let value = event.target.value
-    localStorage.setItem('fontSize',value)
 
-})
+// Get localStorage key here
 
-function get(){
-    let getted = localStorage.getItem('fontSize');
-    textArea.style.fontSize = getted;
-    console.log(getted)
+
+function initilige(){
+    let getFont = localStorage.getItem('font')
+    let getBg = localStorage.getItem('bg')
+    if(getFont && getBg){
+        bgbtn.value = getBg;
+        fontbtn.value = getFont;
+        textArea.style.fontSize = getFont;
+        textArea.style.background = getBg;
+
+    }
+    if(!getFont && !getBg){
+        fontbtn.value = '16px';
+        bgbtn.value = 'pink';
+        textArea.style.fontSize = getFont;
+        textArea.style.background = 'pink';
+
+    }
+
 
 }
 
-// Background color listener here
-// bgColor.addEventListener('change',(event)=>{
-//     // textArea.style.background = event.target.value;
-//     localStorage.setItem('bgColor',event.target.value)
-//     localStorage.getItem('bgColor')
-// })
 
+// all listener here
+fontbtn.addEventListener('change',(event)=>{
+    let fontSize = event.target.value
+    localStorage.setItem('font', fontSize)
+    textArea.style.fontSize = fontSize;
+})
+bgbtn.addEventListener('change',(event)=>{
 
-get();
+    let bgColor = event.target.value
+    localStorage.setItem('bg', bgColor)
+    textArea.style.background = bgColor;
+    // initilige()
+})
+clearbtn.addEventListener('click',()=>{
+    localStorage.removeItem('font')
+    localStorage.removeItem('bg')
+})
+
+initilige()
